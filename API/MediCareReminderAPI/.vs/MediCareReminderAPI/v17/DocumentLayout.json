@@ -1,0 +1,233 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Student\\source\\repos\\MediCareReminderAPI\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8C3F4C13-E914-458F-9424-3A990721463B}|MediCareReminderAPI\\MediCareReminderAPI.csproj|c:\\users\\student\\source\\repos\\medicarereminderapi\\medicarereminderapi\\controllers\\medicationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C3F4C13-E914-458F-9424-3A990721463B}|MediCareReminderAPI\\MediCareReminderAPI.csproj|solutionrelative:medicarereminderapi\\controllers\\medicationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C3F4C13-E914-458F-9424-3A990721463B}|MediCareReminderAPI\\MediCareReminderAPI.csproj|c:\\users\\student\\source\\repos\\medicarereminderapi\\medicarereminderapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C3F4C13-E914-458F-9424-3A990721463B}|MediCareReminderAPI\\MediCareReminderAPI.csproj|solutionrelative:medicarereminderapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C3F4C13-E914-458F-9424-3A990721463B}|MediCareReminderAPI\\MediCareReminderAPI.csproj|c:\\users\\student\\source\\repos\\medicarereminderapi\\medicarereminderapi\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C3F4C13-E914-458F-9424-3A990721463B}|MediCareReminderAPI\\MediCareReminderAPI.csproj|solutionrelative:medicarereminderapi\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C3F4C13-E914-458F-9424-3A990721463B}|MediCareReminderAPI\\MediCareReminderAPI.csproj|c:\\users\\student\\source\\repos\\medicarereminderapi\\medicarereminderapi\\models\\medication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C3F4C13-E914-458F-9424-3A990721463B}|MediCareReminderAPI\\MediCareReminderAPI.csproj|solutionrelative:medicarereminderapi\\models\\medication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C3F4C13-E914-458F-9424-3A990721463B}|MediCareReminderAPI\\MediCareReminderAPI.csproj|c:\\users\\student\\source\\repos\\medicarereminderapi\\medicarereminderapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C3F4C13-E914-458F-9424-3A990721463B}|MediCareReminderAPI\\MediCareReminderAPI.csproj|solutionrelative:medicarereminderapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C3F4C13-E914-458F-9424-3A990721463B}|MediCareReminderAPI\\MediCareReminderAPI.csproj|c:\\users\\student\\source\\repos\\medicarereminderapi\\medicarereminderapi\\models\\registerrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C3F4C13-E914-458F-9424-3A990721463B}|MediCareReminderAPI\\MediCareReminderAPI.csproj|solutionrelative:medicarereminderapi\\models\\registerrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C3F4C13-E914-458F-9424-3A990721463B}|MediCareReminderAPI\\MediCareReminderAPI.csproj|c:\\users\\student\\source\\repos\\medicarereminderapi\\medicarereminderapi\\migrations\\20260828091515_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C3F4C13-E914-458F-9424-3A990721463B}|MediCareReminderAPI\\MediCareReminderAPI.csproj|solutionrelative:medicarereminderapi\\migrations\\20260828091515_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C3F4C13-E914-458F-9424-3A990721463B}|MediCareReminderAPI\\MediCareReminderAPI.csproj|c:\\users\\student\\source\\repos\\medicarereminderapi\\medicarereminderapi\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C3F4C13-E914-458F-9424-3A990721463B}|MediCareReminderAPI\\MediCareReminderAPI.csproj|solutionrelative:medicarereminderapi\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C3F4C13-E914-458F-9424-3A990721463B}|MediCareReminderAPI\\MediCareReminderAPI.csproj|c:\\users\\student\\source\\repos\\medicarereminderapi\\medicarereminderapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{8C3F4C13-E914-458F-9424-3A990721463B}|MediCareReminderAPI\\MediCareReminderAPI.csproj|solutionrelative:medicarereminderapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C3F4C13-E914-458F-9424-3A990721463B}|MediCareReminderAPI\\MediCareReminderAPI.csproj|c:\\users\\student\\source\\repos\\medicarereminderapi\\medicarereminderapi\\medicarereminderapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{8C3F4C13-E914-458F-9424-3A990721463B}|MediCareReminderAPI\\MediCareReminderAPI.csproj|solutionrelative:medicarereminderapi\\medicarereminderapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C3F4C13-E914-458F-9424-3A990721463B}|MediCareReminderAPI\\MediCareReminderAPI.csproj|c:\\users\\student\\source\\repos\\medicarereminderapi\\medicarereminderapi\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{8C3F4C13-E914-458F-9424-3A990721463B}|MediCareReminderAPI\\MediCareReminderAPI.csproj|solutionrelative:medicarereminderapi\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C3F4C13-E914-458F-9424-3A990721463B}|MediCareReminderAPI\\MediCareReminderAPI.csproj|c:\\users\\student\\source\\repos\\medicarereminderapi\\medicarereminderapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{8C3F4C13-E914-458F-9424-3A990721463B}|MediCareReminderAPI\\MediCareReminderAPI.csproj|solutionrelative:medicarereminderapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C3F4C13-E914-458F-9424-3A990721463B}|MediCareReminderAPI\\MediCareReminderAPI.csproj|c:\\users\\student\\source\\repos\\medicarereminderapi\\medicarereminderapi\\models\\loginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C3F4C13-E914-458F-9424-3A990721463B}|MediCareReminderAPI\\MediCareReminderAPI.csproj|solutionrelative:medicarereminderapi\\models\\loginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MedicationsController.cs",
+              "DocumentMoniker": "C:\\Users\\Student\\source\\repos\\MediCareReminderAPI\\MediCareReminderAPI\\Controllers\\MedicationsController.cs",
+              "RelativeDocumentMoniker": "MediCareReminderAPI\\Controllers\\MedicationsController.cs",
+              "ToolTip": "C:\\Users\\Student\\source\\repos\\MediCareReminderAPI\\MediCareReminderAPI\\Controllers\\MedicationsController.cs",
+              "RelativeToolTip": "MediCareReminderAPI\\Controllers\\MedicationsController.cs",
+              "ViewState": "AgIAACIAAAAgMzMzMzMbwDUAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-07T10:35:29.87Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Student\\source\\repos\\MediCareReminderAPI\\MediCareReminderAPI\\Program.cs",
+              "RelativeDocumentMoniker": "MediCareReminderAPI\\Program.cs",
+              "ToolTip": "C:\\Users\\Student\\source\\repos\\MediCareReminderAPI\\MediCareReminderAPI\\Program.cs",
+              "RelativeToolTip": "MediCareReminderAPI\\Program.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAABwAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-27T09:54:45.001Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\Student\\source\\repos\\MediCareReminderAPI\\MediCareReminderAPI\\Models\\User.cs",
+              "RelativeDocumentMoniker": "MediCareReminderAPI\\Models\\User.cs",
+              "ToolTip": "C:\\Users\\Student\\source\\repos\\MediCareReminderAPI\\MediCareReminderAPI\\Models\\User.cs",
+              "RelativeToolTip": "MediCareReminderAPI\\Models\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-27T09:49:26.466Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Medication.cs",
+              "DocumentMoniker": "C:\\Users\\Student\\source\\repos\\MediCareReminderAPI\\MediCareReminderAPI\\Models\\Medication.cs",
+              "RelativeDocumentMoniker": "MediCareReminderAPI\\Models\\Medication.cs",
+              "ToolTip": "C:\\Users\\Student\\source\\repos\\MediCareReminderAPI\\MediCareReminderAPI\\Models\\Medication.cs",
+              "RelativeToolTip": "MediCareReminderAPI\\Models\\Medication.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-27T09:50:13.915Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "RegisterRequest.cs",
+              "DocumentMoniker": "C:\\Users\\Student\\source\\repos\\MediCareReminderAPI\\MediCareReminderAPI\\Models\\RegisterRequest.cs",
+              "RelativeDocumentMoniker": "MediCareReminderAPI\\Models\\RegisterRequest.cs",
+              "ToolTip": "C:\\Users\\Student\\source\\repos\\MediCareReminderAPI\\MediCareReminderAPI\\Models\\RegisterRequest.cs",
+              "RelativeToolTip": "MediCareReminderAPI\\Models\\RegisterRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-27T09:52:10.277Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\Student\\source\\repos\\MediCareReminderAPI\\MediCareReminderAPI\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "MediCareReminderAPI\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\Student\\source\\repos\\MediCareReminderAPI\\MediCareReminderAPI\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "MediCareReminderAPI\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-27T09:43:58.461Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Student\\source\\repos\\MediCareReminderAPI\\MediCareReminderAPI\\appsettings.json",
+              "RelativeDocumentMoniker": "MediCareReminderAPI\\appsettings.json",
+              "ToolTip": "C:\\Users\\Student\\source\\repos\\MediCareReminderAPI\\MediCareReminderAPI\\appsettings.json",
+              "RelativeToolTip": "MediCareReminderAPI\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-08-27T10:16:02.352Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "MediCareReminderAPI.csproj",
+              "DocumentMoniker": "C:\\Users\\Student\\source\\repos\\MediCareReminderAPI\\MediCareReminderAPI\\MediCareReminderAPI.csproj",
+              "RelativeDocumentMoniker": "MediCareReminderAPI\\MediCareReminderAPI.csproj",
+              "ToolTip": "C:\\Users\\Student\\source\\repos\\MediCareReminderAPI\\MediCareReminderAPI\\MediCareReminderAPI.csproj",
+              "RelativeToolTip": "MediCareReminderAPI\\MediCareReminderAPI.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-08-27T09:30:35.129Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Student\\source\\repos\\MediCareReminderAPI\\MediCareReminderAPI\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "MediCareReminderAPI\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\Student\\source\\repos\\MediCareReminderAPI\\MediCareReminderAPI\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "MediCareReminderAPI\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAA5wBAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-27T10:13:42.744Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "20260828091515_InitialCreate.cs",
+              "DocumentMoniker": "C:\\Users\\Student\\source\\repos\\MediCareReminderAPI\\MediCareReminderAPI\\Migrations\\20260828091515_InitialCreate.cs",
+              "RelativeDocumentMoniker": "MediCareReminderAPI\\Migrations\\20260828091515_InitialCreate.cs",
+              "ToolTip": "C:\\Users\\Student\\source\\repos\\MediCareReminderAPI\\MediCareReminderAPI\\Migrations\\20260828091515_InitialCreate.cs",
+              "RelativeToolTip": "MediCareReminderAPI\\Migrations\\20260828091515_InitialCreate.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-28T09:15:16.075Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\Student\\source\\repos\\MediCareReminderAPI\\MediCareReminderAPI\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "MediCareReminderAPI\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\Student\\source\\repos\\MediCareReminderAPI\\MediCareReminderAPI\\Properties\\launchSettings.json",
+              "RelativeToolTip": "MediCareReminderAPI\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-08-28T09:03:11.296Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "LoginRequest.cs",
+              "DocumentMoniker": "C:\\Users\\Student\\source\\repos\\MediCareReminderAPI\\MediCareReminderAPI\\Models\\LoginRequest.cs",
+              "RelativeDocumentMoniker": "MediCareReminderAPI\\Models\\LoginRequest.cs",
+              "ToolTip": "C:\\Users\\Student\\source\\repos\\MediCareReminderAPI\\MediCareReminderAPI\\Models\\LoginRequest.cs",
+              "RelativeToolTip": "MediCareReminderAPI\\Models\\LoginRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-27T09:51:42.552Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Users\\Student\\source\\repos\\MediCareReminderAPI\\MediCareReminderAPI\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "MediCareReminderAPI\\appsettings.Development.json",
+              "ToolTip": "C:\\Users\\Student\\source\\repos\\MediCareReminderAPI\\MediCareReminderAPI\\appsettings.Development.json",
+              "RelativeToolTip": "MediCareReminderAPI\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-08-27T10:16:12.581Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

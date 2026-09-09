@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="primary_blue">#1976D2</color>
+    <color name="primary_dark">#125AA0</color>
+    <color name="light_blue">#EAF5FF</color>
+    <color name="very_light_blue">#F5FAFF</color>
+
+    <color name="dark_navy">#17324D</color>
+    <color name="text_secondary">#60758A</color>
+
+    <color name="white">#FFFFFF</color>
+
+</resources>

@@ -1,0 +1,51 @@
+# =========================
+# Android Studio / Gradle
+# =========================
+
+.gradle/
+**/build/
+local.properties
+
+# Android Studio
+.idea/
+*.iml
+.externalNativeBuild/
+.cxx/
+
+# Kotlin
+.kotlin/
+
+# =========================
+# Visual Studio / .NET
+# =========================
+
+.vs/
+**/bin/
+**/obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+
+# =========================
+# Secrets / local settings
+# =========================
+
+appsettings.Development.json
+appsettings.Local.json
+
+# =========================
+# Operating system
+# =========================
+
+.DS_Store
+Thumbs.db
+desktop.ini
