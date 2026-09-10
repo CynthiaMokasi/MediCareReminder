@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -22,13 +21,13 @@ jobs:
           java-version: '17'
 
       - name: Make Gradle executable
-        working-directory: Android
+        working-directory: Android/MediCareReminder
         run: chmod +x gradlew
 
       - name: Run Android tests
-        working-directory: Android
+        working-directory: Android/MediCareReminder
         run: ./gradlew test
 
       - name: Build Android app
-        working-directory: Android
+        working-directory: Android/MediCareReminder
         run: ./gradlew assembleDebug
