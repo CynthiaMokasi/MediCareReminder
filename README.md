@@ -384,7 +384,9 @@ Screenshots will be added to this section to demonstrate the completed applicati
 ### APK link
 https://advtechonline-my.sharepoint.com/:u:/g/personal/st10245513_rcconnect_edu_za/IQCfZIPLaKjaRJISJswNcT92AUWiYmdtkP6Cfafe7utfc1I
 
-
+NB: IF YOU WANT TO DOWNLOAD THE APP PLESE USE MY SCHOOL EMAIL AND PASSWORD:
+EMAIL:st10245513@rcconnect.edu.za
+Password:Nhlelo@123
 
 # 🎥 Video Demonstration
 
