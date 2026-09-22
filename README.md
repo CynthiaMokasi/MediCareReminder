@@ -352,41 +352,45 @@ Screenshots will be added to this section to demonstrate the completed applicati
 
 ### Login Screen
 
-![Login Screen](screenshots/login.png)
+<img width="3024" height="4032" alt="WhatsApp Image 2026-09-22 at 15 35 53" src="https://github.com/user-attachments/assets/69e4ce4e-aa4e-4e1e-879d-52e827521176" />
+
 
 ### Registration Screen
 
-![Registration Screen](screenshots/register.png)
+<img width="3024" height="4032" alt="WhatsApp Image 2026-09-22 at 15 35 53 (1)" src="https://github.com/user-attachments/assets/f05f2d31-4d8a-4e20-aae6-f7570c283f74" />
+
 
 ### Dashboard
 
-![Dashboard](screenshots/dashboard.png)
+<img width="3024" height="4032" alt="WhatsApp Image 2026-09-22 at 15 35 54 (2)" src="https://github.com/user-attachments/assets/20b0f5ad-a3d8-4736-846c-bcc2e11e0dec" />
+
 
 ### Add Medication
 
-![Add Medication](screenshots/add-medication.png)
+<img width="3024" height="4032" alt="WhatsApp Image 2026-09-22 at 15 35 55" src="https://github.com/user-attachments/assets/efe18224-5f2a-4b4d-8b17-7dba1922687b" />
+
 
 ### Medications
 
-![Medications](screenshots/medications.png)
+<img width="3024" height="4032" alt="WhatsApp Image 2026-09-22 at 15 35 54 (1)" src="https://github.com/user-attachments/assets/08b52bd9-d80d-450f-a29f-207db4eee5c7" />
 
-### Settings
 
-![Settings](screenshots/settings.png)
+### Settings and Medication Reminder
 
-### Medication Reminder
 
-![Medication Reminder](screenshots/reminder.png)
+<img width="3024" height="4032" alt="WhatsApp Image 2026-09-22 at 15 35 54" src="https://github.com/user-attachments/assets/bca77270-4883-4f57-a72c-b8cfdae4ecef" />
 
-> Replace the image paths above with the actual screenshot filenames after adding the screenshots to the repository.
 
----
+### APK link
+https://advtechonline-my.sharepoint.com/:u:/g/personal/st10245513_rcconnect_edu_za/IQCfZIPLaKjaRJISJswNcT92AUWiYmdtkP6Cfafe7utfc1I
+
+
 
 # 🎥 Video Demonstration
 
 A video demonstration of the MediCareReminder application will demonstrate the main functionality of the system.
 
-The demonstration should include:
+The demonstration includes:
 
 1. Launching the application.
 2. Registering a new user.
@@ -401,9 +405,8 @@ The demonstration should include:
 ### Video Link
 
 **Demo Video:**
-*Add the final video link here.*
+https://youtu.be/QbUO4uyN-xY
 
----
 
 # 🤖 AI-Use Statement
 
