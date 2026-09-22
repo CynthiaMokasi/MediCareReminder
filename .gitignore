@@ -1,51 +1,15 @@
-# =========================
-# Android Studio / Gradle
-# =========================
-
-.gradle/
-**/build/
-local.properties
-
-# Android Studio
-.idea/
 *.iml
-.externalNativeBuild/
-.cxx/
-
-# Kotlin
-.kotlin/
-
-# =========================
-# Visual Studio / .NET
-# =========================
-
-.vs/
-**/bin/
-**/obj/
-
-# User-specific files
-*.user
-*.suo
-*.userosscache
-*.sln.docstates
-
-# Build results
-[Dd]ebug/
-[Rr]elease/
-x64/
-x86/
-
-# =========================
-# Secrets / local settings
-# =========================
-
-appsettings.Development.json
-appsettings.Local.json
-
-# =========================
-# Operating system
-# =========================
-
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
 .DS_Store
-Thumbs.db
-desktop.ini
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
