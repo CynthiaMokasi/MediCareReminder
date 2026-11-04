@@ -1,3 +1,37 @@
 <resources>
     <string name="app_name">MediCare Reminder</string>
+    <string name="default_web_client_id">650857903967-253mgbsu1ba3gp17c64h2n3skkn1qrg1.apps.googleusercontent.com</string>
+
+    <!-- Login -->
+    <string name="welcome_back">Welcome Back</string>
+    <string name="login_subtitle">Sign in to continue to MediCare Reminder</string>
+    <string name="email_address">Email Address</string>
+    <string name="password">Password</string>
+    <string name="show_password">Show password</string>
+    <string name="login">Login</string>
+    <string name="or">OR</string>
+    <string name="google_sign_in">Continue with Google</string>
+    <string name="create_account">Don\'t have an account? Create Account</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard">Dashboard</string>
+    <string name="my_medications">My Medications</string>
+    <string name="add_medication">Add Medication</string>
+    <string name="settings">Settings</string>
+    <string name="logout">Logout</string>
+
+    <!-- Medication -->
+    <string name="medication_name">Medication Name</string>
+    <string name="dosage">Dosage</string>
+    <string name="frequency">Frequency</string>
+    <string name="reminder_time">Reminder Time</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+
+    <!-- Language -->
+    <string name="language">Language</string>
+    <string name="select_language">Select Your Language</string>
+    <string name="english">English</string>
+    <string name="xitsonga">XiTsonga</string>
+    <string name="isizulu">isiZulu</string>
 </resources>

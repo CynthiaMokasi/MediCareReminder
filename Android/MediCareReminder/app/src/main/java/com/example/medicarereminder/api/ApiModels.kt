@@ -1,10 +1,10 @@
 package com.example.medicareReminder.api
 
 data class RegisterResponse(
-    val message: String,
-    val userId: Int,
-    val fullName: String,
-    val email: String
+    val message: String? = null,
+    val userId: Int? = null,
+    val fullName: String? = null,
+    val email: String? = null
 )
 data class Medication(
     val medicationId: Int = 0,

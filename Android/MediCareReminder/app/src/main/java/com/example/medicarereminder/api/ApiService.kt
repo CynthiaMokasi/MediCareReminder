@@ -11,7 +11,7 @@ import retrofit2.http.Path
 interface ApiService {
 
     // =========================
-    // AUTH
+    // AUTHENTICATION
     // =========================
 
     @POST("api/Auth/register")
@@ -24,6 +24,11 @@ interface ApiService {
         @Body request: LoginRequest
     ): Call<AuthResponse>
 
+    @POST("api/Auth/google")
+    fun googleLogin(
+        @Body request: GoogleLoginRequest
+    ): Call<AuthResponse>
+
 
     // =========================
     // MEDICATIONS
@@ -34,12 +39,10 @@ interface ApiService {
         @Path("userId") userId: Int
     ): Call<List<Medication>>
 
-
     @POST("api/Medications")
     fun addMedication(
         @Body medication: Medication
     ): Call<Medication>
-
 
     @PUT("api/Medications/{id}")
     fun updateMedication(
@@ -47,9 +50,24 @@ interface ApiService {
         @Body medication: Medication
     ): Call<Medication>
 
-
     @DELETE("api/Medications/{id}")
     fun deleteMedication(
         @Path("id") medicationId: Int
     ): Call<Void>
+
+
+    // =========================
+    // USER SETTINGS - COSMOS DB
+    // =========================
+
+    @GET("api/Settings/{userId}")
+    fun getSettings(
+        @Path("userId") userId: String
+    ): Call<UserSettings>
+
+    @PUT("api/Settings/{userId}")
+    fun saveSettings(
+        @Path("userId") userId: String,
+        @Body settings: UserSettings
+    ): Call<UserSettings>
 }

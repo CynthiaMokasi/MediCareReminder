@@ -1,217 +1,254 @@
+
 package com.example.medicareReminder
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.example.medicareReminder.api.ApiClient
 import com.example.medicareReminder.api.Medication
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class AddMedicationActivity : AppCompatActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        setContentView(R.layout.activity_add_medication)
-
-        val back =
-            findViewById<TextView>(
-                R.id.txtAddMedicationBack
-            )
-
-        back.setOnClickListener {
-            finish()
+    private val notificationPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { granted ->
+            if (granted) {
+                Toast.makeText(
+                    this,
+                    "Notification permission granted.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                Toast.makeText(
+                    this,
+                    "Notifications are disabled. Enable them in Settings to receive reminders.",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
         }
 
-        val name =
-            findViewById<EditText>(
-                R.id.etMedicationName
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_add_medication)
+
+        requestNotificationPermission()
+
+        val nameInput = findViewById<EditText>(R.id.etMedicationName)
+        val dosageInput = findViewById<EditText>(R.id.etDosage)
+        val timeInput = findViewById<EditText>(R.id.etMedicationTime)
+        val frequencyInput = findViewById<EditText>(R.id.etFrequency)
+        val saveButton = findViewById<Button>(R.id.btnSaveMedication)
+
+        saveButton.setOnClickListener {
+
+            val name = nameInput.text.toString().trim()
+            val dosage = dosageInput.text.toString().trim()
+            val reminderTime = timeInput.text.toString().trim()
+            val frequency = frequencyInput.text.toString().trim()
+
+            if (
+                name.isBlank() ||
+                dosage.isBlank() ||
+                reminderTime.isBlank() ||
+                frequency.isBlank()
+            ) {
+                Toast.makeText(
+                    this,
+                    "Please complete all medication fields.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
+
+            val preferences = getSharedPreferences(
+                "MediCarePrefs",
+                MODE_PRIVATE
             )
 
-        val dosage =
-            findViewById<EditText>(
-                R.id.etDosage
+            val userId = preferences.getInt("userId", 0)
+
+            if (userId == 0) {
+                Toast.makeText(
+                    this,
+                    "Please log in again.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
+
+            val medication = Medication(
+                medicationId = 0,
+                userId = userId,
+                name = name,
+                dosage = dosage,
+                frequency = frequency,
+                reminderTime = reminderTime
             )
 
-        val time =
-            findViewById<EditText>(
-                R.id.etMedicationTime
-            )
+            saveButton.isEnabled = false
 
-        val frequency =
-            findViewById<EditText>(
-                R.id.etFrequency
-            )
+            ApiClient.apiService.addMedication(medication)
+                .enqueue(object : Callback<Medication> {
 
-        val save =
-            findViewById<Button>(
-                R.id.btnSaveMedication
-            )
+                    override fun onResponse(
+                        call: Call<Medication>,
+                        response: Response<Medication>
+                    ) {
+                        if (response.isSuccessful) {
 
-        save.setOnClickListener {
+                            val saved = response.body()
 
-            val nameText =
-                name.text.toString().trim()
+                            if (saved != null) {
 
-            val dosageText =
-                dosage.text.toString().trim()
+                                lifecycleScope.launch {
 
-            val timeText =
-                time.text.toString().trim()
+                                    try {
+                                        // Save the API response into Room.
+                                        withContext(Dispatchers.IO) {
 
-            val frequencyText =
-                frequency.text.toString().trim()
-
-            when {
-
-                nameText.isEmpty() -> {
-
-                    name.error =
-                        "Enter medication name"
-
-                    name.requestFocus()
-                }
-
-                dosageText.isEmpty() -> {
-
-                    dosage.error =
-                        "Enter dosage"
-
-                    dosage.requestFocus()
-                }
-
-                timeText.isEmpty() -> {
-
-                    time.error =
-                        "Enter reminder time"
-
-                    time.requestFocus()
-                }
-
-                frequencyText.isEmpty() -> {
-
-                    frequency.error =
-                        "Enter frequency"
-
-                    frequency.requestFocus()
-                }
-
-                else -> {
-
-                    val preferences =
-                        getSharedPreferences(
-                            "MediCarePrefs",
-                            MODE_PRIVATE
-                        )
-
-                    val userId =
-                        preferences.getInt(
-                            "userId",
-                            0
-                        )
-
-                    if (userId == 0) {
-
-                        Toast.makeText(
-                            this,
-                            "Please login again.",
-                            Toast.LENGTH_LONG
-                        ).show()
-
-                        return@setOnClickListener
-                    }
-
-                    save.isEnabled = false
-                    save.text = "Saving..."
-
-                    val medication =
-                        Medication(
-                            medicationId = 0,
-                            userId = userId,
-                            name = nameText,
-                            dosage = dosageText,
-                            frequency = frequencyText,
-                            reminderTime = timeText
-                        )
-
-                    ApiClient.apiService
-                        .addMedication(medication)
-                        .enqueue(
-                            object :
-                                Callback<Medication> {
-
-                                override fun onResponse(
-                                    call: Call<Medication>,
-                                    response: Response<Medication>
-                                ) {
-
-                                    save.isEnabled = true
-                                    save.text = "Save Medication"
-
-                                    if (response.isSuccessful) {
-
-                                        val saved =
-                                            response.body()
-
-                                        if (saved != null) {
-
-                                            ReminderScheduler
-                                                .schedule(
-                                                    this@AddMedicationActivity,
-                                                    saved.medicationId,
-                                                    saved.name,
-                                                    saved.dosage,
-                                                    saved.reminderTime
+                                            val database =
+                                                MedicationDatabase.getDatabase(
+                                                    this@AddMedicationActivity
                                                 )
+
+                                            val localMedication =
+                                                MedicationEntity(
+                                                    medicationId = saved.medicationId,
+                                                    userId = userId,
+                                                    name = saved.name,
+                                                    dosage = saved.dosage,
+                                                    frequency = saved.frequency,
+                                                    reminderTime = saved.reminderTime,
+                                                    isSynced = true
+                                                )
+
+                                            database.medicationDao()
+                                                .insertMedication(localMedication)
                                         }
 
-                                        Toast.makeText(
-                                            this@AddMedicationActivity,
-                                            "Medication saved successfully!",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-
-                                        finish()
-
-                                    } else {
-
-                                        val errorMessage = response.errorBody()?.string()
-
-                                        android.util.Log.e(
-                                            "MEDICATION_ERROR",
-                                            "HTTP ${response.code()} - $errorMessage"
+                                        // Schedule the medication reminder.
+                                        ReminderScheduler.schedule(
+                                            context = this@AddMedicationActivity,
+                                            medicationId = saved.medicationId,
+                                            name = saved.name,
+                                            dosage = saved.dosage,
+                                            reminderTime = saved.reminderTime,
+                                            frequency = saved.frequency
                                         )
 
                                         Toast.makeText(
                                             this@AddMedicationActivity,
-                                            "Could not save medication: HTTP ${response.code()}",
+                                            "Medication saved locally and online. Reminder scheduled!",
+                                            Toast.LENGTH_LONG
+                                        ).show()
+
+                                        finish()
+
+                                    } catch (e: Exception) {
+
+                                        Log.e(
+                                            "ADD_MEDICATION",
+                                            "Could not save medication locally.",
+                                            e
+                                        )
+
+                                        // Still schedule the first reminder.
+                                        ReminderScheduler.schedule(
+                                            context = this@AddMedicationActivity,
+                                            medicationId = saved.medicationId,
+                                            name = saved.name,
+                                            dosage = saved.dosage,
+                                            reminderTime = saved.reminderTime,
+                                            frequency = saved.frequency
+                                        )
+
+                                        saveButton.isEnabled = true
+
+                                        Toast.makeText(
+                                            this@AddMedicationActivity,
+                                            "Medication saved online, but local storage failed. Please try again.",
                                             Toast.LENGTH_LONG
                                         ).show()
                                     }
                                 }
 
-                                override fun onFailure(
-                                    call: Call<Medication>,
-                                    t: Throwable
-                                ) {
+                            } else {
+                                saveButton.isEnabled = true
 
-                                    save.isEnabled = true
-                                    save.text = "Save Medication"
-
-                                    Toast.makeText(
-                                        this@AddMedicationActivity,
-                                        "API connection failed: ${t.message}",
-                                        Toast.LENGTH_LONG
-                                    ).show()
-                                }
+                                Toast.makeText(
+                                    this@AddMedicationActivity,
+                                    "Medication saved, but no response data was returned.",
+                                    Toast.LENGTH_LONG
+                                ).show()
                             }
+
+                        } else {
+                            saveButton.isEnabled = true
+
+                            Log.e(
+                                "ADD_MEDICATION",
+                                "API error: ${response.code()} ${response.errorBody()?.string()}"
+                            )
+
+                            Toast.makeText(
+                                this@AddMedicationActivity,
+                                "Could not save medication. Error ${response.code()}",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    }
+
+                    override fun onFailure(
+                        call: Call<Medication>,
+                        t: Throwable
+                    ) {
+                        saveButton.isEnabled = true
+
+                        Log.e(
+                            "ADD_MEDICATION",
+                            "Request failed",
+                            t
                         )
-                }
+
+                        Toast.makeText(
+                            this@AddMedicationActivity,
+                            "Connection error: ${t.message}",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                })
+        }
+    }
+
+    private fun requestNotificationPermission() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+
+            if (
+                ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                notificationPermissionLauncher.launch(
+                    Manifest.permission.POST_NOTIFICATIONS
+                )
             }
         }
     }

@@ -15,9 +15,9 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        if (Build.VERSION.SDK_INT >=
-            Build.VERSION_CODES.TIRAMISU
-        ) {
+        // Ask the user for notification permission
+        // on Android 13 and newer.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
 
             if (
                 checkSelfPermission(
@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        // Get Started button
         val registerButton =
             findViewById<Button>(
                 R.id.btnGetStarted

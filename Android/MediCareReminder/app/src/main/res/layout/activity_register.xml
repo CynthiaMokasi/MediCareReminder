@@ -126,7 +126,10 @@
             android:text="Already have an account?  Login"
             android:textColor="@color/primary_blue"
             android:textSize="15sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:clickable="true"
+            android:focusable="true"
+            android:enabled="true" />
 
     </LinearLayout>
 

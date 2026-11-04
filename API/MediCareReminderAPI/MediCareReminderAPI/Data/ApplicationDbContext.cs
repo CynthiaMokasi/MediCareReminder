@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+using Microsoft.EntityFrameworkCore;
 using MediCareReminderAPI.Models;
 
 namespace MediCareReminderAPI.Data
@@ -22,6 +23,11 @@ namespace MediCareReminderAPI.Data
             modelBuilder.Entity<User>()
                 .HasIndex(u => u.Email)
                 .IsUnique();
+
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.GoogleSubject)
+                .IsUnique()
+                .HasFilter("[GoogleSubject] IS NOT NULL");
 
             modelBuilder.Entity<Medication>()
                 .HasOne(m => m.User)

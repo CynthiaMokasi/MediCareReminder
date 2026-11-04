@@ -4,17 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_welcome"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:clipToPadding="false"
+    android:scrollbars="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="28dp">
+        android:gravity="center_horizontal"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="24dp">
 
         <TextView
             android:id="@+id/btnLoginBack"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="‹  Back"
             android:textColor="@color/primary_blue"
@@ -23,43 +29,42 @@
             android:padding="8dp" />
 
         <TextView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="30dp"
+            android:layout_width="76dp"
+            android:layout_height="76dp"
+            android:layout_marginTop="12dp"
             android:background="@drawable/bg_logo"
             android:gravity="center"
             android:text="M"
             android:textColor="@android:color/white"
-            android:textSize="38sp"
+            android:textSize="36sp"
             android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="14dp"
             android:gravity="center"
-            android:text="Welcome Back"
+            android:text="@string/welcome_back"
             android:textColor="@color/dark_navy"
-            android:textSize="29sp"
+            android:textSize="27sp"
             android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="6dp"
             android:gravity="center"
-            android:text="Sign in to continue to MediCare Reminder"
+            android:text="@string/login_subtitle"
             android:textColor="@color/text_secondary"
-            android:textSize="15sp" />
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/etLoginEmail"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="22dp"
             android:background="@drawable/bg_input"
-            android:hint="Email Address"
+            android:hint="@string/email_address"
             android:inputType="textEmailAddress"
             android:textColor="@color/dark_navy"
             android:textColorHint="@color/text_secondary" />
@@ -68,9 +73,9 @@
             android:id="@+id/etLoginPassword"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="12dp"
             android:background="@drawable/bg_input"
-            android:hint="Password"
+            android:hint="@string/password"
             android:inputType="textPassword"
             android:textColor="@color/dark_navy"
             android:textColorHint="@color/text_secondary" />
@@ -79,33 +84,55 @@
             android:id="@+id/cbLoginShowPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Show password"
+            android:layout_gravity="start"
+            android:text="@string/show_password"
             android:textColor="@color/text_secondary" />
 
         <Button
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:layout_marginTop="20dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="12dp"
             android:background="@drawable/bg_primary_button"
-            android:text="Login"
+            android:text="@string/login"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
             android:textSize="17sp"
             android:textStyle="bold" />
 
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:text="@string/or"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btnGoogleSignIn"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_input"
+            android:text="@string/google_sign_in"
+            android:textAllCaps="false"
+            android:textColor="@color/dark_navy"
+            android:textSize="16sp"
+            android:visibility="visible"
+            android:enabled="true" />
+
+        <TextView
             android:id="@+id/txtGoToRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="22dp"
+            android:layout_marginTop="12dp"
             android:gravity="center"
-            android:padding="12dp"
-            android:text="Don't have an account?  Create Account"
+            android:padding="10dp"
+            android:text="@string/create_account"
             android:textColor="@color/primary_blue"
             android:textSize="15sp"
             android:textStyle="bold" />
 
     </LinearLayout>
-
 </ScrollView>

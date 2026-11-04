@@ -1,4 +1,6 @@
-﻿using BCrypt.Net;
+﻿
+using BCrypt.Net;
+using Google.Apis.Auth;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MediCareReminderAPI.Data;
@@ -11,64 +13,48 @@ namespace MediCareReminderAPI.Controllers
     public class AuthController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IConfiguration _configuration;
 
-        public AuthController(ApplicationDbContext context)
+        public AuthController(
+            ApplicationDbContext context,
+            IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
-        // REGISTER
+        // REGISTER WITH EMAIL AND PASSWORD
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterRequest request)
         {
-            // Validate full name
             if (string.IsNullOrWhiteSpace(request.FullName))
-            {
                 return BadRequest("Full name is required.");
-            }
 
-            // Validate email
             if (string.IsNullOrWhiteSpace(request.Email))
-            {
                 return BadRequest("Email is required.");
-            }
 
-            // Validate password
             if (string.IsNullOrWhiteSpace(request.Password))
-            {
                 return BadRequest("Password is required.");
-            }
 
-            // Clean email
-            var email = request.Email.Trim().ToLower();
+            var email = request.Email.Trim().ToLowerInvariant();
 
-            // Check if email already exists
             var existingUser = await _context.Users
                 .FirstOrDefaultAsync(u => u.Email == email);
 
             if (existingUser != null)
-            {
                 return BadRequest("An account with this email already exists.");
-            }
 
-            // Create new user
             var user = new User
             {
                 FullName = request.FullName.Trim(),
                 Email = email,
-
-                // Securely hash the password
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password),
-
                 CreatedAt = DateTime.UtcNow
             };
 
-            // Save user
             _context.Users.Add(user);
-
             await _context.SaveChangesAsync();
 
-            // Return successful response
             return Ok(new
             {
                 message = "Registration successful.",
@@ -78,48 +64,31 @@ namespace MediCareReminderAPI.Controllers
             });
         }
 
-
-        // LOGIN
+        // LOGIN WITH EMAIL AND PASSWORD
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginRequest request)
         {
-            // Validate email
             if (string.IsNullOrWhiteSpace(request.Email))
-            {
                 return BadRequest("Email is required.");
-            }
 
-            // Validate password
             if (string.IsNullOrWhiteSpace(request.Password))
-            {
                 return BadRequest("Password is required.");
-            }
 
-            // Clean email
-            var email = request.Email.Trim().ToLower();
+            var email = request.Email.Trim().ToLowerInvariant();
 
-            // Find user
             var user = await _context.Users
                 .FirstOrDefaultAsync(u => u.Email == email);
 
-            // User doesn't exist
             if (user == null)
-            {
                 return Unauthorized("Invalid email or password.");
-            }
 
-            // Verify password against BCrypt hash
             bool passwordValid = BCrypt.Net.BCrypt.Verify(
                 request.Password,
                 user.PasswordHash);
 
-            // Password is incorrect
             if (!passwordValid)
-            {
                 return Unauthorized("Invalid email or password.");
-            }
 
-            // Login successful
             return Ok(new
             {
                 message = "Login successful.",
@@ -128,5 +97,97 @@ namespace MediCareReminderAPI.Controllers
                 email = user.Email
             });
         }
+
+        // LOGIN WITH GOOGLE
+        [HttpPost("google")]
+        public async Task<IActionResult> GoogleLogin(
+            [FromBody] GoogleLoginRequest request)
+        {
+            if (string.IsNullOrWhiteSpace(request.IdToken))
+                return BadRequest("Google ID token is required.");
+
+            var googleClientId =
+                _configuration["Google:ClientId"];
+
+            if (string.IsNullOrWhiteSpace(googleClientId))
+                return StatusCode(
+                    500,
+                    "Google Client ID is not configured.");
+
+            GoogleJsonWebSignature.Payload payload;
+
+            try
+            {
+                payload = await GoogleJsonWebSignature.ValidateAsync(
+                    request.IdToken,
+                    new GoogleJsonWebSignature.ValidationSettings
+                    {
+                        Audience = new[] { googleClientId }
+                    });
+            }
+            catch (Exception)
+            {
+                return Unauthorized("Invalid Google ID token.");
+            }
+
+            if (string.IsNullOrWhiteSpace(payload.Subject) ||
+                string.IsNullOrWhiteSpace(payload.Email) ||
+                payload.EmailVerified != true)
+            {
+                return Unauthorized(
+                    "Google account email could not be verified.");
+            }
+
+            var email = payload.Email.Trim().ToLowerInvariant();
+
+            var user = await _context.Users
+                .FirstOrDefaultAsync(u =>
+                    u.GoogleSubject == payload.Subject);
+
+            if (user == null)
+            {
+                user = await _context.Users
+                    .FirstOrDefaultAsync(u => u.Email == email);
+
+                if (user != null)
+                {
+                    // Do not automatically link a password account.
+                    // Explicit account linking requires an authenticated,
+                    // separately authorised linking flow.
+                    return Conflict(
+                        "An account with this email already exists. " +
+                        "Please log in using your existing method first.");
+                }
+
+                user = new User
+                {
+                    FullName = string.IsNullOrWhiteSpace(payload.Name)
+                        ? email
+                        : payload.Name,
+                    Email = email,
+                    GoogleSubject = payload.Subject,
+                    PasswordHash = BCrypt.Net.BCrypt.HashPassword(
+                        Guid.NewGuid().ToString("N") +
+                        Guid.NewGuid().ToString("N")),
+                    CreatedAt = DateTime.UtcNow
+                };
+
+                _context.Users.Add(user);
+                await _context.SaveChangesAsync();
+            }
+
+            return Ok(new
+            {
+                message = "Google login successful.",
+                userId = user.UserId,
+                fullName = user.FullName,
+                email = user.Email
+            });
+        }
+    }
+
+    public class GoogleLoginRequest
+    {
+        public string IdToken { get; set; } = string.Empty;
     }
 }

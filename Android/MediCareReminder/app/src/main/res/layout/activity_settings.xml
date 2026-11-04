@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="user@example.com"
+            android:text=""
             android:textColor="@color/dark_navy"
             android:textSize="16sp" />
 
@@ -38,10 +38,45 @@
             android:textColor="@color/text_secondary"
             android:textSize="15sp" />
 
+        <!-- Language settings -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
+            android:background="@drawable/bg_white_card"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/language"
+                android:textColor="@color/dark_navy"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/select_language"
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp" />
+
+            <Spinner
+                android:id="@+id/spinnerLanguage"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginTop="8dp"
+                android:spinnerMode="dropdown" />
+
+        </LinearLayout>
+
+        <!-- Notifications -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:background="@drawable/bg_white_card"
             android:orientation="vertical"
             android:padding="20dp">
@@ -71,6 +106,7 @@
 
         </LinearLayout>
 
+        <!-- Account -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -96,10 +132,11 @@
                 android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/txtAccountEmailDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="user@example.com"
+                android:text=""
                 android:textColor="@color/dark_navy"
                 android:textSize="16sp" />
 

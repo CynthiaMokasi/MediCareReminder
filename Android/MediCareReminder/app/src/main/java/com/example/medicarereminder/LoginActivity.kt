@@ -1,3 +1,4 @@
+
 package com.example.medicareReminder
 
 import android.content.Intent
@@ -9,121 +10,322 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-
+import androidx.credentials.CredentialManager
+import androidx.credentials.CustomCredential
+import androidx.credentials.GetCredentialRequest
+import androidx.credentials.exceptions.GetCredentialException
+import androidx.lifecycle.lifecycleScope
 import com.example.medicareReminder.api.ApiClient
 import com.example.medicareReminder.api.AuthResponse
+import com.example.medicareReminder.api.GoogleLoginRequest
 import com.example.medicareReminder.api.LoginRequest
-
+import com.google.android.libraries.identity.googleid.GetGoogleIdOption
+import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
+import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential.Companion.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
 
+    private lateinit var emailField: EditText
+    private lateinit var passwordField: EditText
+    private lateinit var loginButton: Button
+    private lateinit var googleButton: Button
+
+    private lateinit var credentialManager: CredentialManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_login)
 
-        // Back button
+        credentialManager = CredentialManager.create(this)
+
         val back = findViewById<TextView>(R.id.btnLoginBack)
 
         back.setOnClickListener {
             finish()
         }
 
-        // Login fields
-        val email = findViewById<EditText>(R.id.etLoginEmail)
-
-        val password = findViewById<EditText>(R.id.etLoginPassword)
+        emailField = findViewById(R.id.etLoginEmail)
+        passwordField = findViewById(R.id.etLoginPassword)
 
         val showPassword =
             findViewById<CheckBox>(R.id.cbLoginShowPassword)
 
-        val loginButton =
-            findViewById<Button>(R.id.btnLogin)
+        loginButton = findViewById(R.id.btnLogin)
+
+        googleButton = findViewById(R.id.btnGoogleSignIn)
 
         val registerLink =
             findViewById<TextView>(R.id.txtGoToRegister)
 
-        // Show / hide password
+        // Show or hide password.
         showPassword.setOnCheckedChangeListener { _, isChecked ->
 
-            password.inputType = if (isChecked) {
-
+            passwordField.inputType = if (isChecked) {
                 InputType.TYPE_CLASS_TEXT or
                         InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-
             } else {
-
                 InputType.TYPE_CLASS_TEXT or
                         InputType.TYPE_TEXT_VARIATION_PASSWORD
             }
 
-            password.setSelection(password.text.length)
+            passwordField.setSelection(passwordField.text.length)
         }
 
-        // Login button
+        // Normal email and password login.
         loginButton.setOnClickListener {
 
-            val emailText =
-                email.text.toString().trim()
-
-            val passwordText =
-                password.text.toString()
+            val emailText = emailField.text.toString().trim()
+            val passwordText = passwordField.text.toString()
 
             when {
 
                 emailText.isEmpty() -> {
-
-                    email.error = "Please enter your email"
-                    email.requestFocus()
+                    emailField.error = "Please enter your email"
+                    emailField.requestFocus()
                 }
 
                 !android.util.Patterns.EMAIL_ADDRESS
                     .matcher(emailText)
                     .matches() -> {
 
-                    email.error =
-                        "Enter a valid email address"
-
-                    email.requestFocus()
+                    emailField.error = "Enter a valid email address"
+                    emailField.requestFocus()
                 }
 
                 passwordText.isEmpty() -> {
-
-                    password.error =
-                        "Please enter your password"
-
-                    password.requestFocus()
+                    passwordField.error = "Please enter your password"
+                    passwordField.requestFocus()
                 }
 
                 else -> {
-
-                    loginUser(
-                        emailText,
-                        passwordText
-                    )
+                    loginUser(emailText, passwordText)
                 }
             }
         }
 
-        // Go to Register
-        registerLink.setOnClickListener {
+        // Google Sign-In.
+        googleButton.setOnClickListener {
+            startGoogleSignIn()
+        }
 
+        // Registration.
+        registerLink.setOnClickListener {
             startActivity(
-                Intent(
-                    this,
-                    RegisterActivity::class.java
-                )
+                Intent(this, RegisterActivity::class.java)
             )
         }
     }
+
+    // =====================================
+    // GOOGLE SIGN-IN
+    // =====================================
+
+    private fun startGoogleSignIn() {
+
+        googleButton.isEnabled = false
+        googleButton.text = "Connecting to Google..."
+
+        lifecycleScope.launch {
+
+            try {
+
+                val googleIdOption =
+                    GetGoogleIdOption.Builder()
+                        .setServerClientId(
+                            getString(R.string.default_web_client_id)
+                        )
+                        .setFilterByAuthorizedAccounts(true)
+                        .build()
+
+                val request =
+                    GetCredentialRequest.Builder()
+                        .addCredentialOption(googleIdOption)
+                        .build()
+
+                try {
+
+                    val result = credentialManager.getCredential(
+                        context = this@LoginActivity,
+                        request = request
+                    )
+
+                    handleGoogleCredential(result.credential)
+
+                } catch (e: androidx.credentials.exceptions.NoCredentialException) {
+
+                    // No previously authorised account.
+                    // Allow the user to select another Google account.
+
+                    val alternativeOption =
+                        GetGoogleIdOption.Builder()
+                            .setServerClientId(
+                                getString(R.string.default_web_client_id)
+                            )
+                            .setFilterByAuthorizedAccounts(false)
+                            .build()
+
+                    val alternativeRequest =
+                        GetCredentialRequest.Builder()
+                            .addCredentialOption(alternativeOption)
+                            .build()
+
+                    val alternativeResult =
+                        credentialManager.getCredential(
+                            context = this@LoginActivity,
+                            request = alternativeRequest
+                        )
+
+                    handleGoogleCredential(
+                        alternativeResult.credential
+                    )
+                }
+
+            } catch (e: GetCredentialException) {
+
+                Toast.makeText(
+                    this@LoginActivity,
+                    "Google Sign-In cancelled or unavailable: ${e.localizedMessage}",
+                    Toast.LENGTH_LONG
+                ).show()
+
+            } catch (e: Exception) {
+
+                Toast.makeText(
+                    this@LoginActivity,
+                    "Google Sign-In error: ${e.localizedMessage}",
+                    Toast.LENGTH_LONG
+                ).show()
+
+            } finally {
+
+                googleButton.isEnabled = true
+                googleButton.text = "Continue with Google"
+            }
+        }
+    }
+
+    private fun handleGoogleCredential(
+        credential: androidx.credentials.Credential
+    ) {
+
+        if (
+            credential is CustomCredential &&
+            credential.type == TYPE_GOOGLE_ID_TOKEN_CREDENTIAL
+        ) {
+
+            try {
+
+                val googleCredential =
+                    GoogleIdTokenCredential.createFrom(
+                        credential.data
+                    )
+
+                sendGoogleTokenToApi(
+                    googleCredential.idToken
+                )
+
+            } catch (e: Exception) {
+
+                Toast.makeText(
+                    this,
+                    "Unable to read Google account details.",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+
+        } else {
+
+            Toast.makeText(
+                this,
+                "Google account credential was not recognised.",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+    }
+
+    private fun sendGoogleTokenToApi(idToken: String) {
+
+        googleButton.isEnabled = false
+        googleButton.text = "Verifying account..."
+
+        val request = GoogleLoginRequest(
+            idToken = idToken
+        )
+
+        ApiClient.apiService.googleLogin(request)
+            .enqueue(object : Callback<AuthResponse> {
+
+                override fun onResponse(
+                    call: Call<AuthResponse>,
+                    response: Response<AuthResponse>
+                ) {
+
+                    googleButton.isEnabled = true
+                    googleButton.text = "Continue with Google"
+
+                    if (response.isSuccessful) {
+
+                        val result = response.body()
+
+                        if (result != null && result.userId > 0) {
+
+                            saveUserSession(
+                                result,
+                                "Google login successful!"
+                            )
+
+                        } else {
+
+                            Toast.makeText(
+                                this@LoginActivity,
+                                "The API returned invalid account information.",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+
+                    } else {
+
+                        Toast.makeText(
+                            this@LoginActivity,
+                            "Google login failed: HTTP ${response.code()}",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+
+                override fun onFailure(
+                    call: Call<AuthResponse>,
+                    t: Throwable
+                ) {
+
+                    googleButton.isEnabled = true
+                    googleButton.text = "Continue with Google"
+
+                    Toast.makeText(
+                        this@LoginActivity,
+                        "Unable to connect to the server.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            })
+    }
+
+    // =====================================
+    // EMAIL AND PASSWORD LOGIN
+    // =====================================
 
     private fun loginUser(
         email: String,
         password: String
     ) {
+
+        loginButton.isEnabled = false
+        loginButton.text = "Logging in..."
 
         val request = LoginRequest(
             email = email,
@@ -138,51 +340,27 @@ class LoginActivity : AppCompatActivity() {
                     response: Response<AuthResponse>
                 ) {
 
+                    loginButton.isEnabled = true
+                    loginButton.text = "Login"
+
                     if (response.isSuccessful) {
 
                         val result = response.body()
 
-                        if (result != null) {
+                        if (result != null && result.userId > 0) {
 
-                            // Save logged-in user's information
-                            val preferences =
-                                getSharedPreferences(
-                                    "MediCarePrefs",
-                                    MODE_PRIVATE
-                                )
+                            saveUserSession(
+                                result,
+                                "Login successful!"
+                            )
 
-                            preferences.edit()
-                                .putInt(
-                                    "userId",
-                                    result.userId
-                                )
-                                .putString(
-                                    "fullName",
-                                    result.fullName
-                                )
-                                .putString(
-                                    "email",
-                                    result.email
-                                )
-                                .apply()
+                        } else {
 
                             Toast.makeText(
                                 this@LoginActivity,
-                                "Login successful!",
-                                Toast.LENGTH_SHORT
+                                "Invalid account information.",
+                                Toast.LENGTH_LONG
                             ).show()
-
-                            val intent =
-                                Intent(
-                                    this@LoginActivity,
-                                    DashboardActivity::class.java
-                                )
-
-                            intent.flags =
-                                Intent.FLAG_ACTIVITY_NEW_TASK or
-                                        Intent.FLAG_ACTIVITY_CLEAR_TASK
-
-                            startActivity(intent)
                         }
 
                     } else {
@@ -200,12 +378,106 @@ class LoginActivity : AppCompatActivity() {
                     t: Throwable
                 ) {
 
-                    Toast.makeText(
-                        this@LoginActivity,
-                        "Unable to connect to the API: ${t.message}",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    loginButton.isEnabled = true
+                    loginButton.text = "Login"
+
+                    tryOfflineLogin(email)
                 }
             })
+    }
+
+    // =====================================
+    // SAVE USER SESSION
+    // =====================================
+
+    private fun saveUserSession(
+        result: AuthResponse,
+        message: String
+    ) {
+
+        val preferences = getSharedPreferences(
+            "MediCarePrefs",
+            MODE_PRIVATE
+        )
+
+        preferences.edit()
+            .putInt("userId", result.userId)
+            .putString("fullName", result.fullName)
+            .putString("email", result.email)
+            .putBoolean("offlineAccessEnabled", true)
+            .apply()
+
+        Toast.makeText(
+            this,
+            message,
+            Toast.LENGTH_SHORT
+        ).show()
+
+        openDashboard()
+    }
+
+    // =====================================
+    // OFFLINE LOGIN
+    // =====================================
+
+    private fun tryOfflineLogin(email: String) {
+
+        val preferences = getSharedPreferences(
+            "MediCarePrefs",
+            MODE_PRIVATE
+        )
+
+        val savedEmail = preferences.getString("email", "")
+        val savedUserId = preferences.getInt("userId", 0)
+
+        val offlineAccessEnabled = preferences.getBoolean(
+            "offlineAccessEnabled",
+            false
+        )
+
+        val emailMatches =
+            email.equals(savedEmail, ignoreCase = true)
+
+        if (
+            offlineAccessEnabled &&
+            emailMatches &&
+            savedUserId > 0
+        ) {
+
+            Toast.makeText(
+                this,
+                "Internet unavailable. Opening your previously authenticated offline account.",
+                Toast.LENGTH_LONG
+            ).show()
+
+            openDashboard()
+
+        } else {
+
+            Toast.makeText(
+                this,
+                "Unable to connect. Please connect to the internet and log in successfully first.",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+    }
+
+    // =====================================
+    // OPEN DASHBOARD
+    // =====================================
+
+    private fun openDashboard() {
+
+        val intent = Intent(
+            this@LoginActivity,
+            DashboardActivity::class.java
+        )
+
+        intent.flags =
+            Intent.FLAG_ACTIVITY_NEW_TASK or
+                    Intent.FLAG_ACTIVITY_CLEAR_TASK
+
+        startActivity(intent)
+        finish()
     }
 }
