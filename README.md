@@ -381,8 +381,8 @@ Screenshots will be added to this section to demonstrate the completed applicati
 <img width="3024" height="4032" alt="WhatsApp Image 2026-09-22 at 15 35 54" src="https://github.com/user-attachments/assets/bca77270-4883-4f57-a72c-b8cfdae4ecef" />
 
 
-### APK link
-https://advtechonline-my.sharepoint.com/:u:/g/personal/st10245513_rcconnect_edu_za/IQCfZIPLaKjaRJISJswNcT92AUWiYmdtkP6Cfafe7utfc1I
+### APK Release App
+
 
 NB: IF YOU WANT TO DOWNLOAD THE APP PLESE USE MY SCHOOL EMAIL AND PASSWORD:
 EMAIL:st10245513@rcconnect.edu.za
