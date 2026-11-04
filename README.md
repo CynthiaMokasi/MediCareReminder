@@ -382,7 +382,7 @@ Screenshots will be added to this section to demonstrate the completed applicati
 
 
 ### APK Release App
-
+Note that my App release APK is inside Android/MedicareReminder
 
 NB: IF YOU WANT TO DOWNLOAD THE APP PLESE USE MY SCHOOL EMAIL AND PASSWORD:
 EMAIL:st10245513@rcconnect.edu.za
